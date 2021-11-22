@@ -1,3 +1,7 @@
+<?php
+// initialiser une session
+session_start();
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -13,6 +17,15 @@
   <body>
    <div class="contaner">
    <h1>Bienvenu sur notre plateforme </h1>
+   <h3>Utilisateur connecté: <?php
+   if (isset($_SESSION['username'])) {
+       # code...
+       echo  $_SESSION['username']; 
+   }else {
+       echo "Aucun utilisateur connecté";
+   }
+    ?></h3> <a href="logout.php">Logout</a>
+   
    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->

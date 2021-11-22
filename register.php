@@ -35,7 +35,7 @@
 </div>
 <div class="mb-3">
   <button type="submit" name="submit" class="btn btn-success">S'inscrire</button>
-  Déjà inscrit ? connectez-vous<a href=""> ici</a>
+  Déjà inscrit ? connectez-vous<a href="login.php"> ici</a>
 </div>
     </form>
 
@@ -63,7 +63,7 @@ if (isset($_REQUEST['submit'])) {
    $password =  htmlspecialchars($_POST['password']);
 
    // requete
-$sql =" INSERT INTO users (id, username, email, type, password) VALUES (
+    $sql =" INSERT INTO users (id, username, email, type, password) VALUES (
     NULL,
     '$username',
     '$email',
@@ -82,7 +82,5 @@ $sql =" INSERT INTO users (id, username, email, type, password) VALUES (
         <p>Cliquez ici pour vous <a href='login.php'>connectez</a> </p>
          </div>";
     }
-²
-}else {
 }
 ?>

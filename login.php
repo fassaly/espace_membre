@@ -1,3 +1,4 @@
+<?php require('config.php'); ?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -12,7 +13,21 @@
   </head>
   <body>
    <div class="container">
-   <h1>Identifiant</h1>
+        <h1>Identifiant</h1>
+        <form action="" method="post">
+        <div class="mb-3">
+            <label for="username" class="form-label">Nom d'utilisateur</label>
+            <input type="text" class="form-control" id="username" name="username" placeholder="Nom d'utilisateur">
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Mot de passe</label>
+            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+        </div>
+        <div class="mb-3">
+            <button type="submit" name="submit" class="btn btn-success">Se connecter</button>
+            Pas de compte ? s'inscrire<a href="register.php"> ici</a>
+        </div>
+        </form>
    </div>
 
     <!-- Optional JavaScript; choose one of the two! -->
@@ -27,3 +42,27 @@
     -->
   </body>
 </html>
+
+<?php
+    if (isset($_POST['submit'])) {
+        $username = htmlspecialchars($_POST['username']);
+        $password =  htmlspecialchars($_POST['password']);
+        // requette
+        $sql = "select * from users
+        where username = '$username' and password= '".hash('sha256',$password)."'
+        ";
+        $res = mysqli_query($cnx,$sql);
+        if (mysqli_num_rows($res) == 1 ) {
+            $user = mysqli_fetch_assoc($res);
+            if ($user['type'] == "admin") {
+                header('location: admin/home.php');
+            }else {
+                $_SESSION['username']= $user['username'];
+                header('location: index.php');
+            }
+            
+        }
+        
+        
+    }
+?>
